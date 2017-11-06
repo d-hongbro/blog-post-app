@@ -53,7 +53,7 @@ app.get('/posts/:id', (req, res) => {
 });
 
 
-app.post('/restaurants', (req, res) => {
+app.post('/posts', (req, res) => {
 
   const requiredFields = ['title', 'content', 'author.firstName', 'author.lastName'];
   for (let i=0; i<requiredFields.length; i++) {
