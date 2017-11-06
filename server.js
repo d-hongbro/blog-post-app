@@ -55,7 +55,7 @@ app.get('/posts/:id', (req, res) => {
 
 app.post('/posts', (req, res) => {
 
-  const requiredFields = ['title', 'content', 'author.firstName', 'author.lastName'];
+  const requiredFields = ['title', 'content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -97,7 +97,7 @@ app.put('/posts/:id', (req, res) => {
   // if the user sent over any of the updatableFields, we udpate those values
   // in document
   const toUpdate = {};
-  const updateableFields = ['title', 'content', 'author.firstName', 'author.lastName'];
+  const updateableFields = ['title', 'content', 'author', 'author'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
