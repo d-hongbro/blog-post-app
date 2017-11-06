@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 // GET requests to /restaurants => return 10 restaurants
 app.get('/posts', (req, res) => {
   Blogpost
+
     .find()
     // we're limiting because restaurants db has > 25,000
     // documents, and that's too much to process/return
@@ -26,7 +27,6 @@ app.get('/posts', (req, res) => {
     // call the `.apiRepr` instance method we've created in
     // models.js in order to only expose the data we want the API return.
     .then(blogPosts => {
-      console.log(blogPosts);
       res.json({
         blogPosts: blogPosts.map(
           (blogPost) => blogPost.apiRepr())

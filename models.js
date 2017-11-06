@@ -27,6 +27,7 @@ const blogPostSchema = mongoose.Schema({
     lastName: String
   },
   content: String,
+  created: {type: Date, default: Date.now}
 });
 
 // *virtuals* (http://mongoosejs.com/docs/guide.html#virtuals)
@@ -35,7 +36,8 @@ const blogPostSchema = mongoose.Schema({
 // to generate a human readable string based on the address object
 // we're storing in Mongo.
 blogPostSchema.virtual('nameString').get(function() {
-  return `${this.author.firstName} ${this.author.lastName}`.trim()});
+  return `${this.author.firstName} ${this.author.lastName}`.trim();
+});
 
 // this virtual grabs the most recent grade for a restaurant.
 // restaurantSchema.virtual('grade').get(function() {
@@ -52,7 +54,8 @@ blogPostSchema.methods.apiRepr = function() {
     id: this._id,
     title: this.title,
     author: this.nameString,
-    content: this.content
+    content: this.content,
+    created: this.created
   };
 }
 
@@ -70,6 +73,6 @@ blogPostSchema.methods.apiRepr = function() {
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const Blogpost = mongoose.model('blogpost', blogPostSchema);
+const Blogpost = mongoose.model('Blogpost', blogPostSchema);
 
 module.exports = {Blogpost};
